@@ -23,7 +23,7 @@
     <ul>
         {% for jogador in object_list %}
             <li>
-                <strong>{{ jogador.name }}</strong> (Personagem: {{ jogador.character }}, Função: {{ jogador.role }})
+                <strong>{{ jogador.name }}</strong> (Personagem: {{ jogador.character }}, 
                 <div class="actions">
                     <a href="{% url 'edita-jogador' jogador.pk %}">Editar</a>
                     <form action="{% url 'apaga-jogador' jogador.pk %}" method="post">

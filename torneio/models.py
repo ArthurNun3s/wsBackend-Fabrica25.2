@@ -5,8 +5,8 @@ from django.utils import timezone
 
 class Player(models.Model):
     name = models.CharField(max_length=100)
-    role = models.CharField(max_length=50, help_text="Ex: Duelista, Suporte, Sentinela")
-    character = models.CharField(max_length=50, help_text="Ex: Jett, Sage, Cypher")
+    
+    character = models.CharField(max_length=50, help_text="Ex: Scorpion, Shunsui, Ryu")
 
     def __str__(self):
         return self.name
