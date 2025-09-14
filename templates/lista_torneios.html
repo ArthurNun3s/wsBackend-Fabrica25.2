@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Lista de Torneios</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+      body {
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="mb-4">Lista de Torneios</h1>
+      <a href="{% url 'cria-torneio' %}" class="btn btn-primary mb-3">Adicionar Novo Torneio</a>
+      <a href="{% url 'home' %}" class="btn btn-secondary mb-3">Voltar para Home</a>
+      <ul class="list-group">
+        {% for torneio in object_list %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <strong>{{ torneio.name }}</strong> <div>
+              <a href="{% url 'edita-torneio' torneio.pk %}" class="btn btn-sm btn-info">Editar</a>
+              <form action="{% url 'apaga-torneio' torneio.pk %}" method="post" class="d-inline">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-sm btn-danger">Apagar</button>
+              </form>
+            </div>
+          </li>
+        {% empty %}
+          <li class="list-group-item">Nenhum torneio cadastrado ainda.</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmar Deleção</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style> body { padding: 20px; text-align: center; } </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tem certeza?</h1>
+        <p>Você está prestes a apagar permanentemente o torneio: <strong>{{ object.name }}</strong>.</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Sim, apagar</button>
+            <a href="{% url 'lista-torneios' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</body>
+</html>
