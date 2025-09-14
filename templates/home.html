@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF--8">
+    <title>Início - Gerenciador de Torneios</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding-top: 50px; }
+        .container { max-width: 600px; margin: auto; }
+        .link-button {
+            display: inline-block;
+            padding: 15px 25px;
+            font-size: 18px;
+            color: white;
+            background-color: #007bff;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Gerenciador de Torneios!</h1>
+        <p>Este é o painel de controle do seu projeto. Use os links abaixo para navegar.</p>
+        
+        <a href="{% url 'lista-jogadores' %}" class="link-button">Ver Lista de Jogadores</a>
+        </div>
+</body>
+</html>

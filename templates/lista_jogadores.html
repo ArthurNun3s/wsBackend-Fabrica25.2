@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Jogadores</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        h1 { color: #333; }
+        ul { list-style-type: none; padding: 0; }
+        li { background-color: #f4f4f4; margin-bottom: 5px; padding: 10px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Lista de Jogadores do Torneio</h1>
+
+    <a href="{% url 'cria-jogador' %}" style="display: block; margin-bottom: 20px;">Adicionar Novo Jogador</a>
+
+    <ul>
+        {% for jogador in object_list %}
+            <li>
+                <strong>{{ jogador.name }}</strong> (Personagem: {{ jogador.character }}, Função: {{ jogador.role }})
+                <a href="{% url 'edita-jogador' jogador.pk %}" style="float: right;">Editar</a>
+            </li>
+        {% empty %}
+            <li>Nenhum jogador cadastrado ainda.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

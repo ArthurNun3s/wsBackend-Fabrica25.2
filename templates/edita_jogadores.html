@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Jogador</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; max-width: 600px; margin: auto; }
+        form { display: flex; flex-direction: column; }
+        form p { display: flex; flex-direction: column; }
+        input { padding: 8px; margin-top: 5px; }
+        button { padding: 10px; background-color: #007bff; color: white; border: none; cursor: pointer; margin-top: 10px; }
+        a { display: block; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Editar Jogador: {{ object.name }}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Atualizar</button>
+    </form>
+
+    <a href="{% url 'lista-jogadores' %}">Cancelar e voltar para a lista</a>
+</body>
+</html>
