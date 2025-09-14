@@ -13,6 +13,8 @@ class Player(models.Model):
 
 class Tournament(models.Model):
     name = models.CharField(max_length=200)
+    
+    players = models.ManyToManyField(Player, related_name='tournaments', blank=True)
 
     def __str__(self):
         return self.name

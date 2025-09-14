@@ -1,8 +1,12 @@
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView, DetailView
 from django.urls import reverse_lazy
 from django.conf import settings 
 import requests 
 from .models import Player, Tournament
+from .forms import TournamentForm
+import random
+from django.shortcuts import redirect
+from .models import Player, Tournament, Match
 
 # --- VIEW DA HOME PAGE ---
 class HomePageView(TemplateView):
@@ -49,6 +53,11 @@ class PlayerDeleteView(DeleteView):
     success_url = reverse_lazy('lista-jogadores')
 
 # --- VIEWS DE TORNEIO ---
+class TournamentDetailView(DetailView):
+    model = Tournament
+    template_name = 'detalhes_torneio.html'
+
+
 class TournamentListView(ListView):
     model = Tournament
     template_name = 'lista_torneios.html'
@@ -62,11 +71,33 @@ class TournamentCreateView(CreateView):
 class TournamentUpdateView(UpdateView):
     model = Tournament
     template_name = 'edita_torneio.html'
-    fields = ['name']
+    form_class = TournamentForm
     success_url = reverse_lazy('lista-torneios')
 
 class TournamentDeleteView(DeleteView):
     model = Tournament
     template_name = 'apaga_torneio.html'
     success_url = reverse_lazy('lista-torneios')
+
+# --- LÓGICA DO CHAVEAMENTO ---
+def gerar_chaveamento(request, pk):
+    if request.method == 'POST':
+        torneio = Tournament.objects.get(pk=pk)
+        jogadores = list(torneio.players.all())
+        
+        random.shuffle(jogadores)
+        
+        Match.objects.filter(tournament=torneio, round_number=1).delete()
+
+        for i in range(0, len(jogadores) - 1, 2):
+            jogador1 = jogadores[i]
+            jogador2 = jogadores[i+1]
+            Match.objects.create(
+                tournament=torneio,
+                player1=jogador1,
+                player2=jogador2,
+                round_number=1
+            )
+            
+    return redirect('detalhes-torneio', pk=torneio.pk)
 

@@ -18,8 +18,10 @@
       <ul class="list-group">
         {% for torneio in object_list %}
           <li class="list-group-item d-flex justify-content-between align-items-center">
-            <strong>{{ torneio.name }}</strong> <div>
-              <a href="{% url 'edita-torneio' torneio.pk %}" class="btn btn-sm btn-info">Editar</a>
+            <strong>{{ torneio.name }}</strong>
+            <div>
+              <a href="{% url 'detalhes-torneio' torneio.pk %}" class="btn btn-sm btn-primary">Ver Detalhes</a>
+
               <form action="{% url 'apaga-torneio' torneio.pk %}" method="post" class="d-inline">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-sm btn-danger">Apagar</button>
